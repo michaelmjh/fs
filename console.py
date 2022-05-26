@@ -4,11 +4,52 @@ from models.fitness_class import FitnessClass
 from models.member import Member
 
 import repositories.booking_repository as booking_repository
-import repositories.fitness_class_repository as fitness_repository
+import repositories.fitness_class_repository as fitness_class_repository
 import repositories.member_repository as member_repository
 
+# member_1 = Member("Michael")
+# member_repository.save(member_1)
 
+# member_2 = Member("Ethan")
+# member_repository.save(member_2)
 
+# member_3 = Member("Pamela")
+# member_repository.save(member_3)
 
+# class_1 = FitnessClass("Capoeira", "19:00")
+# fitness_class_repository.save(class_1)
+
+# class_2 = FitnessClass("Yoga", "21:00")
+# fitness_class_repository.save(class_2)
+
+# class_3 = FitnessClass("Gymnastics", "12:00")
+# fitness_class_repository.save(class_3)
+
+# booking_1 = Booking(1, 1)
+# booking_repository.save(booking_1)
+
+# booking_2 = Booking(2, 1)
+# booking_repository.save(booking_2)
+
+# booking_3 = Booking(3, 1)
+# booking_repository.save(booking_3)
+
+# booking_4 = Booking(3, 2)
+# booking_repository.save(booking_4)
+
+# booking_5 = Booking(2, 3)
+# booking_repository.save(booking_5)
+
+members = member_repository.select_all()
+for member in members:
+    print(member.__dict__)
+
+classes = fitness_class_repository.select_all()
+for fc in classes:
+    print(fc.__dict__)
+
+bookings = booking_repository.select_all()
+for booking in bookings:
+    print(booking.__dict__)
 
 pdb.set_trace()
