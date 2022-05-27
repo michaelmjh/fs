@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Manager</title>
+</head>
+<body>
+    <section id="content">
+        <section id="header">
+            <h2>Gym</h2>
+        </section>
+    
+        <section id="aside">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/classes">Classes</a>
+                    </li>
+                    <li>
+                        <a href="/members">Members</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+            {% block content %}
+
+            {% endblock %}
+        </section>
+
+        <section id="footer">
+            <h3>© 2022 Big Guns Gym</h3>
+        </section>
+
+</body>
+</html>
