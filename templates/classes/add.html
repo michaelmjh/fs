@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Add Class</h1>
+
+<form action="/classes" method="post">
+    <div>
+        <label for="class_name">Class Name:</label>
+        <br>
+        <input type="text" id="class_name" name="class_name" placeholder="Enter a class name" required autofocus>
+        <br>
+        <label for="class_time">Class Time:</label>
+        <br>
+        <input type="text" id="class_time" name="class_time" placeholder="Enter a class time" required>
+    </div>
+
+    <button type="submit">Add class</button>
+</form>
+
+{% endblock %}

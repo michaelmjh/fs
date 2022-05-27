@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/members/{{member.member_id}}" method="post">
+    <div>
+        <label for="member_name">Member Name:</label>
+        <br>
+        <input type="text" id="member_name" name="member_name" value="{{member.member_name}}" required autofocus>
+    </div>
+
+    <button type="submit">Edit Member</button>
+</form>
+
+{% endblock %}

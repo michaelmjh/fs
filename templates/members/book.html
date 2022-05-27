@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Book a Class</h1>
+
+<form action="/members/{{member.member_id}}/book" method="post">
+    <div>
+        <label>{{member.member_name}}</label>
+        <br>
+        <label for="fitness_class">Class:</label>
+        <br>
+        <select id="fitness_class" name="class_id">
+            {% for fitness_class in fitness_classes %}
+                <option value="{{fitness_class.class_id}}">
+                    {{fitness_class.class_name}}: {{fitness_class.class_time}}
+                </option>
+            {% endfor%}
+        </select>
+    </div>
+
+    <button type="submit">Book class</button>
+</form>
+
+{% endblock %}

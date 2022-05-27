@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Classes</h1>
+
+<section id="member_navigation">
+    <nav>
+        <ul>
+            <li>
+                <a href="/classes/add">Add New Class</a>
+            </li>
+    </nav>
+</section>
+
+    {% for fc in classes %}
+        <nav>
+            <ul>
+                <li>
+                    <p>{{fc.class_name}}</a></p>
+                    <p>{{fc.class_time}}</p>
+                    <a href="/classes/{{fc.class_id}}/edit">Edit</a>
+                </li>
+            </ul>
+            
+        </nav>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -7,6 +7,10 @@ import repositories.booking_repository as booking_repository
 import repositories.fitness_class_repository as fitness_class_repository
 import repositories.member_repository as member_repository
 
+# booking_repository.delete_all()
+# fitness_class_repository.delete_all()
+# member_repository.delete_all()
+
 # member_1 = Member("Michael")
 # member_repository.save(member_1)
 
@@ -25,19 +29,19 @@ import repositories.member_repository as member_repository
 # class_3 = FitnessClass("Gymnastics", "12:00")
 # fitness_class_repository.save(class_3)
 
-# booking_1 = Booking(1, 1)
+# booking_1 = Booking(class_1, member_1)
 # booking_repository.save(booking_1)
 
-# booking_2 = Booking(2, 1)
+# booking_2 = Booking(class_2, member_1)
 # booking_repository.save(booking_2)
 
-# booking_3 = Booking(3, 1)
+# booking_3 = Booking(class_3, member_1)
 # booking_repository.save(booking_3)
 
-# booking_4 = Booking(3, 2)
+# booking_4 = Booking(class_3, member_2)
 # booking_repository.save(booking_4)
 
-# booking_5 = Booking(2, 3)
+# booking_5 = Booking(class_2, member_3)
 # booking_repository.save(booking_5)
 
 members = member_repository.select_all()

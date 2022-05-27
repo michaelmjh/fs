@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Members</h1>
+<section id="member_navigation">
+    <nav>
+        <ul>
+            <li>
+                <a href="/members/add">Add New Member</a>
+            </li>
+    </nav>
+</section>
 
-<table>
-  <tr>
-    <th>Name</th>
-  
-  </tr>
-  {% for member in members %}
-  <tr>
-    <td><a href="/members/{{member.member_id}}"> {{member.member_name}} </a></td>
-  </tr>
-  {% endfor %}
+<h1>Members</h1>
+    
+    {% for member in members %}
+        <nav>
+            <ul>
+                <li>
+                    <p><a href="/members/{{member.member_id}}"> {{member.member_name}}</a></p>
+                    <a href="/members/{{member.member_id}}/edit">Edit</a>
+                    <a href="/members/{{member.member_id}}/book">Book class</a>
+                </li>
+            </ul>
+            
+        </nav>
+    {% endfor %}
 </table>
 {% endblock %}

@@ -1,8 +1,8 @@
 class Booking:
 
-    def __init__(self, class_id, member_id, booking_id = None):
-        self.class_id = class_id
-        self.member_id = member_id
+    def __init__(self, fitness_class, member, booking_id = None):
+        self.fitness_class = fitness_class
+        self.member = member
         self.booking_id = booking_id
 
     
