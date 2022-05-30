@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Class Details</h1>
+<p>Class:</p>
+<p>{{fitness_class.class_name}}
+<p>Class Time:</p>
+<p>{{fitness_class.class_time}}</p>
+<p>book</p>
+<form action="/classes/{{fitness_class.class_id}}/book" method="post">
+    {% for member in unbooked_members%}
+        <input type="checkbox" name="member_selected" value="{{member.member_id}}">{{member.member_id}}: {{member.member_name}}<br>
+    {% endfor %}
+    
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

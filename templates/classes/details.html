@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Class Details</h1>
+<p>Class:</p>
+<p>{{fitness_class.class_name}}
+<p>Class Time:</p>
+<p>{{fitness_class.class_time}}</p>
+
+<ol>
+    {% for member in booked_members %}
+    <li>
+        <br>
+        <p>{{member.member_id}}: {{member.member_name}}</p>
+    </li>
+    {% endfor %}
+    <li>
+        <br>
+        <a href="/classes/{{fitness_class.class_id}}/book">Book member</a>
+    </li>
+</ol>
+
+{% endblock %}

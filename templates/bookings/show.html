@@ -2,16 +2,6 @@
 
 {% block content %}
 <h1>Bookings</h1>
-
-<section id="bookings_navigation">
-    <nav>
-        <ul>
-            <li>
-                <a href="/bookings/add">Book Class</a>
-            </li>
-    </nav>
-</section>
-
     {% for booking in bookings %}
         <nav>
             <ul>
@@ -20,10 +10,9 @@
                     <p>{{booking.fitness_class.class_name}}</a></p>
                     <p>{{booking.fitness_class.class_time}}</p>
                     <p>{{booking.member.member_name}}</p>
-                    <a href="/bookings/{{booking.booking_id}}/edit">Edit</a>
+                    <a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a>
                 </li>
             </ul>
-            
         </nav>
     {% endfor %}
 </table>

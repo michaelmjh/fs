@@ -14,31 +14,7 @@ def bookings():
     bookings = booking_repository.select_all()
     return render_template("bookings/show.html", bookings = bookings)
 
-# @fitness_class_blueprint.route("/classes/add", methods=['GET'])
-# def add_class():
-
-#     return render_template("classes/add.html")
-
-# @fitness_class_blueprint.route("/classes", methods=['POST'])
-# def create_class():
-#     class_name = request.form['class_name']
-#     class_time = request.form['class_time']
-#     fitness_class = FitnessClass(class_name, class_time)
-#     fitness_class_repository.save(fitness_class)
-
-#     return redirect('/classes')
-
-# @fitness_class_blueprint.route("/classes/<id>/edit", methods=['GET'])
-# def edit_class(id):
-#     fitness_class = fitness_class_repository.select(id)
-#     return render_template('classes/edit.html', fitness_class=fitness_class)
-
-
-# @fitness_class_blueprint.route("/classes/<id>", methods=['POST'])
-# def update_member(id):
-#     class_name = request.form['class_name']
-#     class_time = request.form['class_time']
-#     fitness_class = FitnessClass(class_name, class_time, id)
-#     fitness_class_repository.update(fitness_class)
-
-#     return redirect('/classes')
+@booking_blueprint.route("/bookings/<id>/del", methods=['GET'])
+def delete(id):
+    booking_repository.delete(id)
+    return redirect("/bookings")

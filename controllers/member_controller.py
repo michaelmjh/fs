@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask import Blueprint
+from models.booking import Booking
+from models.fitness_class import FitnessClass
 from models.member import Member
 import repositories.booking_repository as booking_repository
 import repositories.fitness_class_repository as fitness_class_repository
@@ -35,12 +37,36 @@ def update_member(id):
     member_name = request.form['member_name']
     member = Member(member_name, id)
     member_repository.update(member)
-
     return redirect('/members')
+
+@members_blueprint.route("/members/<id>/details", methods=['GET'])
+def details(id):
+    member = member_repository.select(id)
+    booked_classes = member_repository.select_booked_classes(id)
+    return render_template('/members/details.html', member = member, booked_classes = booked_classes)
 
 @members_blueprint.route("/members/<id>/book", methods=['GET'])
 def book(id):
+    unbooked_classes = []
     member = member_repository.select(id)
-    fitness_classes = fitness_class_repository.select_all()
-    return render_template('members/book.html', member = member, fitness_classes = fitness_classes)
+    all_classes = fitness_class_repository.select_all()
+    booked_classes = member_repository.select_booked_classes(id)
+    for aclass in all_classes:
+        booked = False
+        for bclass in booked_classes:
+            if aclass.class_id == bclass.class_id:
+                booked = True
+        if booked == False:
+            unbooked_classes.append(aclass)
 
+    return render_template('members/book.html', member = member, unbooked_classes = unbooked_classes)
+
+@members_blueprint.route("/members/<id>/book", methods=['POST'])
+def create_booking(id):
+    member = member_repository.select(id)
+    class_id = request.form['class_id']
+    fitness_class = fitness_class_repository.select(class_id)
+    booking = Booking(fitness_class, member)
+    booking_repository.save(booking)
+    return redirect(f'/members/{id}/details')
+    

@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from flask import Blueprint
+from models.booking import Booking
 from models.fitness_class import FitnessClass
 from models.member import Member
+import repositories.booking_repository as booking_repository
 import repositories.fitness_class_repository as fitness_class_repository
 import repositories.member_repository as member_repository
 
@@ -32,10 +34,42 @@ def edit_class(id):
 
 
 @fitness_class_blueprint.route("/classes/<id>", methods=['POST'])
-def update_member(id):
+def update_class(id):
     class_name = request.form['class_name']
     class_time = request.form['class_time']
     fitness_class = FitnessClass(class_name, class_time, id)
     fitness_class_repository.update(fitness_class)
 
     return redirect('/classes')
+
+@fitness_class_blueprint.route("/classes/<id>/details", methods = ['GET'])
+def details(id):
+    fitness_class = fitness_class_repository.select(id)
+    booked_members = fitness_class_repository.select_booked_members(id)
+    return render_template('/classes/details.html', fitness_class = fitness_class, booked_members = booked_members)
+
+@fitness_class_blueprint.route('/classes/<id>/book', methods = ['GET'])
+def book_members(id):
+    unbooked_members = []
+    fitness_class = fitness_class_repository.select(id)
+    all_members = member_repository.select_all()
+    booked_members = fitness_class_repository.select_booked_members(id)
+    for member in all_members:
+        booked = False
+        for bmember in booked_members:
+            if member.member_id == bmember.member_id:
+                booked = True
+        if booked == False:
+            unbooked_members.append(member)
+
+    return render_template('classes/book_members.html', fitness_class = fitness_class, unbooked_members = unbooked_members)
+
+@fitness_class_blueprint.route('/classes/<id>/book', methods=['POST'])
+def result(id):
+    members_list = request.form.getlist('member_selected')
+    for member in members_list:
+        member_to_book = member_repository.select(member)
+        fitness_class = fitness_class_repository.select(id)
+        new_booking = Booking(fitness_class, member_to_book)
+        booking_repository.save(new_booking)
+    return redirect(f"/classes/{id}/details")
