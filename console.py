@@ -52,7 +52,11 @@ members = member_repository.select_deactived()
 for member in members:
     print(member.__dict__)
 
-classes = fitness_class_repository.select_all()
+classes = fitness_class_repository.select_active()
+for fc in classes:
+    print(fc.__dict__)
+
+classes = fitness_class_repository.select_deactived()
 for fc in classes:
     print(fc.__dict__)
 

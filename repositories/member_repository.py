@@ -39,7 +39,6 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        # active = True if result['active']  == 0 else False
         member = Member(result['first_name'], result['last_name'], result['active'], result['member_id'])
     return member
 
@@ -64,9 +63,10 @@ def select_booked_classes(id):
     results = run_sql(sql, values)
 
     for result in results:
-        class_name = result['class_name']
-        class_time = result['class_time']
+        name = result['name']
+        time = result['time']
+        active = True
         class_id = result['class_id']
-        new_class= FitnessClass(class_name, class_time, class_id)
+        new_class= FitnessClass(name, time, active, class_id)
         booked_classes.append(new_class)
     return booked_classes

@@ -5,13 +5,22 @@
 
 <form action="/classes/{{fitness_class.class_id}}" method="post">
     <div>
-        <label for="class_name">Class Name:</label>
+        <label for="name">Class:</label>
         <br>
-        <input type="text" id="class_name" name="class_name" value="{{fitness_class.class_name}}" required autofocus>
+        <input type="text" id="name" name="name" value="{{fitness_class.name}}" required autofocus>
         <br>
-        <label for="class_time">Class Time:</label>
+        <label for="time">Time:</label>
         <br>
-        <input type="text" id="class_time" name="class_time" value="{{fitness_class.class_time}}" required>
+        <input type="text" id="time" name="time" value="{{fitness_class.time}}" required>
+        <br>
+        <select name="active" id="active">
+            <option value="1">True</option>
+            {% if fitness_class.active == False %}
+                <option selected="selected" value="0">False</option>
+            {% else %}
+                <option value="0">False</option>
+            {% endif %}
+        </select>
     </div>
 
     <button type="submit">Edit class</button>

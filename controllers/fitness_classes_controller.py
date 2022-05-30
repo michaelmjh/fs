@@ -11,8 +11,13 @@ fitness_class_blueprint = Blueprint("fitness_class", __name__)
 
 @fitness_class_blueprint.route("/classes")
 def classes():
-    classes = fitness_class_repository.select_all()
+    classes = fitness_class_repository.select_active()
     return render_template("classes/show.html", classes = classes)
+
+@fitness_class_blueprint.route("/classes/deactive")
+def deactivated_classes():
+    classes = fitness_class_repository.select_deactive()
+    return render_template("classes/deactive.html", classes = classes)
 
 @fitness_class_blueprint.route("/classes/add", methods=['GET'])
 def add_class():
@@ -20,9 +25,9 @@ def add_class():
 
 @fitness_class_blueprint.route("/classes", methods=['POST'])
 def create_class():
-    class_name = request.form['class_name']
-    class_time = request.form['class_time']
-    fitness_class = FitnessClass(class_name, class_time)
+    name = request.form['name']
+    time = request.form['time']
+    fitness_class = FitnessClass(name, time)
     fitness_class_repository.save(fitness_class)
 
     return redirect('/classes')
@@ -32,14 +37,17 @@ def edit_class(id):
     fitness_class = fitness_class_repository.select(id)
     return render_template('classes/edit.html', fitness_class=fitness_class)
 
-
 @fitness_class_blueprint.route("/classes/<id>", methods=['POST'])
 def update_class(id):
-    class_name = request.form['class_name']
-    class_time = request.form['class_time']
-    fitness_class = FitnessClass(class_name, class_time, id)
+    name = request.form['name']
+    time = request.form['time']
+    active_val = request.form['active']
+    if active_val == "1":
+        active = True
+    elif active_val == "0":
+        active = False
+    fitness_class = FitnessClass(name, time, active, id)
     fitness_class_repository.update(fitness_class)
-
     return redirect('/classes')
 
 @fitness_class_blueprint.route("/classes/<id>/details", methods = ['GET'])
@@ -52,7 +60,7 @@ def details(id):
 def book_members(id):
     unbooked_members = []
     fitness_class = fitness_class_repository.select(id)
-    all_members = member_repository.select_all()
+    all_members = member_repository.select_active()
     booked_members = fitness_class_repository.select_booked_members(id)
     for member in all_members:
         booked = False

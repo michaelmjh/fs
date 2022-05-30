@@ -7,19 +7,22 @@
 <p>Name:</p>
 <p>{{member.first_name}} {{member.last_name}}</p>
 <p>Membership Status:</p>
-{% if member.active == True %}
-    <p>Active</p>
+{% if member.active == False %}
+    <p>Deactivated</p>
+    <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
 {% else %}
-    <p>Deacivated</p>
+    <p>Active</p>
+    <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
+    <ul>
+        <a href="/members/{{member.member_id}}/book">Book class</a>
+        {% for bclass in booked_classes %}
+        <li>
+            <p>{{bclass.class_id}}: {{bclass.name}}, {{bclass.time}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    
 {% endif %}
 
-<ul>
-    <a href="/members/{{member.member_id}}/book">Book class</a>
-    {% for bclass in booked_classes %}
-    <li>
-        <p>{{bclass.class_id}}: {{bclass.class_name}}, {{bclass.class_time}}</p>
-    </li>
-    {% endfor %}
-</ul>
 
 {% endblock %}

@@ -7,9 +7,4 @@ class Member:
         self.member_id = member_id
         
 
-    def change_active_status(self):
-        if self.active == True:
-            self.active = False
-        else:
-            self.active = True
 

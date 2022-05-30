@@ -4,19 +4,29 @@ from models.fitness_class import FitnessClass
 from models.member import Member
 
 def save(fitness_class):
-    sql = "INSERT INTO fitness_classes (class_name, class_time) VALUES (?, ?) RETURNING class_id"
-    values = [fitness_class.class_name, fitness_class.class_time]
+    sql = "INSERT INTO fitness_classes (name, time, active) VALUES (?, ?, ?) RETURNING class_id"
+    values = [fitness_class.name, fitness_class.time, fitness_class.active]
     results = run_sql(sql, values)
     fitness_class.class_id = results[0]['class_id']
     return fitness_class
 
-def select_all():
+def select_active():
     fitness_classes = []
 
-    sql = "SELECT * FROM fitness_classes"
+    sql = "SELECT * FROM fitness_classes WHERE active = True"
     results = run_sql(sql)
     for row in results:
-        fitness_class = FitnessClass(row['class_name'],row['class_time'], row['class_id'])
+        fitness_class = FitnessClass(row['name'], row['time'], row['active'], row['class_id'])
+        fitness_classes.append(fitness_class)
+    return fitness_classes
+
+def select_deactive():
+    fitness_classes = []
+
+    sql = "SELECT * FROM fitness_classes WHERE active = False"
+    results = run_sql(sql)
+    for row in results:
+        fitness_class = FitnessClass(row['name'], row['time'], row['active'], row['class_id'])
         fitness_classes.append(fitness_class)
     return fitness_classes
 
@@ -27,7 +37,7 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        fitness_class = FitnessClass(result['class_name'], result['class_time'], result['class_id'] )
+        fitness_class = FitnessClass(result['name'], result['time'], result['active'], result['class_id'] )
     return fitness_class
 
 def delete_all():
@@ -40,8 +50,8 @@ def delete(id):
     run_sql(sql, values)
 
 def update(fitness_class):
-    sql = "UPDATE fitness_classes SET (class_name, class_time) = (?, ?) WHERE class_id = ?"
-    values = [fitness_class.class_name, fitness_class.class_time, fitness_class.class_id]
+    sql = "UPDATE fitness_classes SET (name, time, active) = (?, ?, ?) WHERE class_id = ?"
+    values = [fitness_class.name, fitness_class.time, fitness_class.active, fitness_class.class_id]
     run_sql(sql, values)
 
 def select_booked_members(id):
@@ -51,9 +61,11 @@ def select_booked_members(id):
     results = run_sql(sql, values)
 
     for result in results:
-        member_name = result['member_name']
-        member_id = result['member_id']
-        new_member = Member(member_name, member_id)
+        active = result['active']
+        # if active:
+        first_name = result['first_name']
+        last_name = result['last_name']
+        member_id = result['member_id']            
+        new_member = Member(first_name, last_name, active, member_id)
         booked_members.append(new_member)
     return booked_members
-    

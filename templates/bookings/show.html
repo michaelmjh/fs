@@ -7,9 +7,9 @@
             <ul>
                 <li>
                     <p>{{booking.booking_id}}</p>
-                    <p>{{booking.fitness_class.class_name}}</a></p>
-                    <p>{{booking.fitness_class.class_time}}</p>
-                    <p>{{booking.member.member_name}}</p>
+                    <p>{{booking.fitness_class.name}}</a></p>
+                    <p>{{booking.fitness_class.time}}</p>
+                    <p>{{booking.member.first_name}} {{booking.member.last_name}}</p>
                     <a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a>
                 </li>
             </ul>

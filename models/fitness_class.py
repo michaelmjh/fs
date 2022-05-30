@@ -1,8 +1,9 @@
 class FitnessClass:
 
-    def __init__(self, class_name, class_time, class_id = None):
-        self.class_name = class_name
-        self.class_time = class_time
+    def __init__(self, name, time, active = True, class_id = None):
+        self.name = name
+        self.time = time
+        self.active = active
         self.class_id = class_id
 
     

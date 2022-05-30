@@ -13,8 +13,9 @@ CREATE TABLE members (
 
 CREATE TABLE fitness_classes (
     class_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    class_name VARCHAR,
-    class_time VARCHAR
+    name VARCHAR,
+    time VARCHAR,
+    active BOOLEAN
 );
 
 CREATE TABLE bookings (

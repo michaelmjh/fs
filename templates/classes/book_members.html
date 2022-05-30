@@ -3,13 +3,13 @@
 {% block content %}
 <h1>Class Details</h1>
 <p>Class:</p>
-<p>{{fitness_class.class_name}}
+<p>{{fitness_class.name}}
 <p>Class Time:</p>
-<p>{{fitness_class.class_time}}</p>
+<p>{{fitness_class.time}}</p>
 <p>book</p>
 <form action="/classes/{{fitness_class.class_id}}/book" method="post">
     {% for member in unbooked_members%}
-        <input type="checkbox" name="member_selected" value="{{member.member_id}}">{{member.member_id}}: {{member.member_name}}<br>
+        <input type="checkbox" name="member_selected" value="{{member.member_id}}">{{member.member_id}}: {{member.first_name}} {{member.last_name}}<br>
     {% endfor %}
     
     <input type="submit" value="Submit">

@@ -14,7 +14,7 @@ def members():
     members = member_repository.select_active()
     return render_template("members/show.html", members = members)
 
-@members_blueprint.route("/members/deactived")
+@members_blueprint.route("/members/deactive")
 def deactive_members():
     members = member_repository.select_deactived()
     return render_template("members/deactive.html", members = members)
@@ -42,9 +42,9 @@ def update_member(id):
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     active_val = request.form['active']
-    if active_val == 1:
+    if active_val == "1":
         active = True
-    else:
+    elif active_val == "0":
         active = False
     member = Member(first_name, last_name, active, id)
     member_repository.update(member)
@@ -60,9 +60,9 @@ def details(id):
 def book(id):
     unbooked_classes = []
     member = member_repository.select(id)
-    all_classes = fitness_class_repository.select_all()
+    active_classes = fitness_class_repository.select_active()
     booked_classes = member_repository.select_booked_classes(id)
-    for aclass in all_classes:
+    for aclass in active_classes:
         booked = False
         for bclass in booked_classes:
             if aclass.class_id == bclass.class_id:

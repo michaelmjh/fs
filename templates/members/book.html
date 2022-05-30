@@ -16,7 +16,7 @@
             <select id="fitness_class" name="class_id">
                 {% for fitness_class in unbooked_classes %}
                     <option value="{{fitness_class.class_id}}">
-                        {{fitness_class.class_name}}: {{fitness_class.class_time}}
+                        {{fitness_class.name}}: {{fitness_class.time}}
                     </option>
                 {% endfor%}
             </select>
