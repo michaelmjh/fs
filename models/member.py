@@ -6,6 +6,3 @@ class Member:
         self.premium_member = premium_member
         self.active = active
         self.member_id = member_id
-        
-
-

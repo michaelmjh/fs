@@ -1,3 +1,4 @@
+from controllers import fitness_classes_controller
 from db.run_sql import run_sql
 from models.booking import Booking
 from models.fitness_class import FitnessClass
@@ -23,7 +24,7 @@ def select_active():
 def select_standard(fitness_classes):
     standard_classes = []
     for fclass in fitness_classes:
-        if int(fclass.time) < 1700 or int(fclass.time) > 2000:
+        if int(fclass.time) < 17 or int(fclass.time) > 20:
             standard_classes.append(fclass)
     return standard_classes
 
@@ -83,6 +84,3 @@ def select_premium_members(members):
         if member.premium_member == True:
             available_members.append(member)
     return available_members
-
-def check_capacity():
-    pass

@@ -6,10 +6,10 @@
         <nav>
             <ul>
                 <li>
-                    <p>{{booking.booking_id}}</p>
-                    <p>{{booking.fitness_class.name}}</a></p>
-                    <p>{{booking.fitness_class.time}}</p>
-                    <p>{{booking.member.first_name}} {{booking.member.last_name}}</p>
+                    <p>Booking ID:{{booking.booking_id}}</p>
+                    <p>Class: {{booking.fitness_class.name}}</a></p>
+                    <p>Time: {{booking.fitness_class.time}}:00</p>
+                    <p>Member: {{booking.member.first_name}} {{booking.member.last_name}}</p>
                     <a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a>
                 </li>
             </ul>

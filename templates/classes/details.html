@@ -5,16 +5,16 @@
 <p>Class:</p>
 <p>{{fitness_class.name}}
 <p>Time:</p>
-<p>{{fitness_class.time}}</p>
+<p>{{fitness_class.time}}:00</p>
 <p>Capacity:</p>
 <p>{{fitness_class.capacity}}</p>
 <p>Status:</p>
 {% if fitness_class.active == False %}
     <p>Deactivated</p>
-    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Class Details</a>
+    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
 {% else %}
     <p>Active</p>
-    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Class Details</a>
+    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
     <ol>
         {% for member in booked_members %}
         <li>
@@ -22,11 +22,13 @@
             <p>{{member.member_id}}: {{member.first_name}} {{member.last_name}}</p>
         </li>
         {% endfor %}
-    
-        <li>
-            <br>
-            <a href="/classes/{{fitness_class.class_id}}/book">Book member</a>
-        </li>
     </ol>
+    {% if spaces > 0 %}
+        <p>Spaces Available: {{spaces}}</p>
+        <a href="/classes/{{fitness_class.class_id}}/book">Book member</a>
+    {% else %}
+        <p>No more spaces avalable on this class</p>
+    {% endif %}
+    
 {% endif %}
 {% endblock %}

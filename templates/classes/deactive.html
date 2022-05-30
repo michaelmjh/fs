@@ -4,24 +4,15 @@
 
 
 <h1>Deactivated Classes</h1>
-<section id="class_navigation">
-    <nav>
-        <ul>
-            <li>
-                <a href="/classes/add">Add New Class</a>
-            </li>
-    </nav>
-</section>
 
     {% for fc in classes %}
         <nav>
             <ul>
                 <li>
                     <p>Class: {{fc.name}}</a></p>
-                    <p>Time: {{fc.time}}</p>
+                    <p>Time: {{fc.time}}:00</p>
                     <p>Total Capacity: {{fc.capacity}}</p>
                     <a href="/classes/{{fc.class_id}}/details">Show Details</a>
-                    <a href="/classes/{{fc.class_id}}/edit">Edit</a>
                 </li>
             </ul>
             

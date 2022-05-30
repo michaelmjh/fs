@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from flask import Blueprint
+from controllers import fitness_classes_controller
 from models.booking import Booking
 from models.fitness_class import FitnessClass
 from models.member import Member
@@ -16,7 +17,7 @@ def members():
 
 @members_blueprint.route("/members/deactive")
 def deactive_members():
-    members = member_repository.select_deactived()
+    members = member_repository.select_deactive()
     return render_template("members/deactive.html", members = members)
 
 @members_blueprint.route("/members/add", methods=['GET'])
@@ -58,7 +59,7 @@ def update_member(id):
         active = False
     member = Member(first_name, last_name, premium, active, id)
     member_repository.update(member)
-    return redirect('/members')
+    return redirect(f'/members/{id}/details')
 
 @members_blueprint.route("/members/<id>/details", methods=['GET'])
 def details(id):
@@ -72,13 +73,17 @@ def book(id):
     member = member_repository.select(id)
     active_classes = fitness_class_repository.select_active()
     booked_classes = member_repository.select_booked_classes(id)
+    
     for aclass in active_classes:
         booked = False
         for bclass in booked_classes:
             if aclass.class_id == bclass.class_id:
                 booked = True
         if booked == False:
-            unbooked_classes.append(aclass)
+            capacity = aclass.capacity
+            spaces_booked = len(fitness_class_repository.select_booked_members(aclass.class_id))
+            if capacity > spaces_booked:
+                unbooked_classes.append(aclass)
 
     if member.premium_member == False:
         unbooked_classes = fitness_class_repository.select_standard(unbooked_classes)

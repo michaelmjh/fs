@@ -6,3 +6,9 @@ class FitnessClass:
         self.capacity = capacity
         self.active = active
         self.class_id = class_id
+
+    def check_capacity(self, bookings):
+        if self.capacity - bookings > 0:
+            return True
+        else:
+            return False

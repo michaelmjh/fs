@@ -11,11 +11,15 @@
         <br>
         <label for="time">Time:</label>
         <br>
-        <input type="text" id="time" name="time" placeholder="Enter a class time" required>
+        <select name="time" id="time">
+            {% for i in range(24) %}
+                <option value="{{i}}">{{i}}:00</option>
+            {% endfor %}
+        </select>
         <br>
         <label for="capacity">Capacity:</label>
         <br>
-        <input type="number" id="capacity" name="capacity" max="10">
+        <input type="number" id="capacity" name="capacity" min="1" max="10">
     </div>
 
     <button type="submit">Add class</button>

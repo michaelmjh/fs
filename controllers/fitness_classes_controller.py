@@ -27,7 +27,8 @@ def add_class():
 def create_class():
     name = request.form['name']
     time = request.form['time']
-    fitness_class = FitnessClass(name, time)
+    capacity = request.form['capacity']
+    fitness_class = FitnessClass(name, time, capacity)
     fitness_class_repository.save(fitness_class)
     return redirect('/classes')
 
@@ -40,23 +41,29 @@ def edit_class(id):
 def update_class(id):
     name = request.form['name']
     time = request.form['time']
+    capacity = request.form['capacity']
     active_val = request.form['active']
     if active_val == "1":
         active = True
     elif active_val == "0":
         active = False
-    fitness_class = FitnessClass(name, time, active, id)
+    fitness_class = FitnessClass(name, time, capacity, active, id)
     fitness_class_repository.update(fitness_class)
-    return redirect('/classes')
+    return redirect(f'/classes/{id}/details')
 
 @fitness_class_blueprint.route("/classes/<id>/details", methods = ['GET'])
 def details(id):
     fitness_class = fitness_class_repository.select(id)
     booked_members = fitness_class_repository.select_booked_members(id)
-    return render_template('/classes/details.html', fitness_class = fitness_class, booked_members = booked_members)
+    spaces = fitness_class.capacity
+    booked = len(booked_members)
+    spaces -= booked
+    
+    return render_template('/classes/details.html', fitness_class = fitness_class, booked_members = booked_members, spaces = spaces)
 
 @fitness_class_blueprint.route('/classes/<id>/book', methods = ['GET'])
 def book_members(id):
+    unbooked = []
     unbooked_members = []
     fitness_class = fitness_class_repository.select(id)
     all_members = member_repository.select_active()
@@ -67,17 +74,20 @@ def book_members(id):
             if member.member_id == bmember.member_id:
                 booked = True
         if booked == False:
-            unbooked_members.append(member)
+            unbooked.append(member)
 
-    if int(fitness_class.time) > 1700 and int(fitness_class.time) < 2000:
-        unbooked_members = fitness_class_repository.select_premium_members(unbooked_members)
+    if int(fitness_class.time) >= 17 and int(fitness_class.time) <= 20:
+        unbooked_members = fitness_class_repository.select_premium_members(unbooked)
+    else:
+        unbooked_members = unbooked
 
     return render_template('classes/book_members.html', fitness_class = fitness_class, unbooked_members = unbooked_members)
 
 @fitness_class_blueprint.route('/classes/<id>/book', methods=['POST'])
 def result(id):
-    member = member_repository.select(member)
+    member_id = request.form['member_id']
+    member = member_repository.select(member_id)
     fitness_class = fitness_class_repository.select(id)
     new_booking = Booking(fitness_class, member)
     booking_repository.save(new_booking)
-    return redirect(f"/classes/{id}/details")
+    return redirect(f"/classes")

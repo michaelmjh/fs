@@ -65,8 +65,9 @@ def select_booked_classes(id):
     for result in results:
         name = result['name']
         time = result['time']
+        capacity = result['capacity']
         active = True
         class_id = result['class_id']
-        new_class= FitnessClass(name, time, active, class_id)
+        new_class= FitnessClass(name, time, capacity, active, class_id)
         booked_classes.append(new_class)
     return booked_classes
