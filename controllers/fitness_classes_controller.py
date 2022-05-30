@@ -76,10 +76,8 @@ def book_members(id):
 
 @fitness_class_blueprint.route('/classes/<id>/book', methods=['POST'])
 def result(id):
-    members_list = request.form.getlist('member_selected')
-    for member in members_list:
-        member_to_book = member_repository.select(member)
-        fitness_class = fitness_class_repository.select(id)
-        new_booking = Booking(fitness_class, member_to_book)
-        booking_repository.save(new_booking)
+    member = member_repository.select(member)
+    fitness_class = fitness_class_repository.select(id)
+    new_booking = Booking(fitness_class, member)
+    booking_repository.save(new_booking)
     return redirect(f"/classes/{id}/details")

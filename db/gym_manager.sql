@@ -16,6 +16,7 @@ CREATE TABLE fitness_classes (
     class_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR,
     time VARCHAR,
+    capacity INTEGER,
     active BOOLEAN
 );
 
