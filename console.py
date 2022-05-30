@@ -11,13 +11,13 @@ import repositories.member_repository as member_repository
 # fitness_class_repository.delete_all()
 # member_repository.delete_all()
 
-# member_1 = Member("Michael")
+# member_1 = Member("Michael", "Hughes")
 # member_repository.save(member_1)
 
-# member_2 = Member("Ethan")
+# member_2 = Member("Ethan", "Hughes")
 # member_repository.save(member_2)
 
-# member_3 = Member("Pamela")
+# member_3 = Member("Pamela", "Sandu")
 # member_repository.save(member_3)
 
 # class_1 = FitnessClass("Capoeira", "19:00")
@@ -44,7 +44,11 @@ import repositories.member_repository as member_repository
 # booking_5 = Booking(class_2, member_3)
 # booking_repository.save(booking_5)
 
-members = member_repository.select_all()
+members = member_repository.select_active()
+for member in members:
+    print(member.__dict__)
+
+members = member_repository.select_deactived()
 for member in members:
     print(member.__dict__)
 

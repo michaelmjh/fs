@@ -11,8 +11,13 @@ members_blueprint = Blueprint("members", __name__)
 
 @members_blueprint.route("/members")
 def members():
-    members = member_repository.select_all()
+    members = member_repository.select_active()
     return render_template("members/show.html", members = members)
+
+@members_blueprint.route("/members/deactived")
+def deactive_members():
+    members = member_repository.select_deactived()
+    return render_template("members/deactive.html", members = members)
 
 @members_blueprint.route("/members/add", methods=['GET'])
 def add_member():
@@ -20,8 +25,9 @@ def add_member():
 
 @members_blueprint.route("/members", methods=['POST'])
 def create_member():
-    member_name = request.form['member_name']
-    member = Member(member_name)
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    member = Member(first_name, last_name)
     member_repository.save(member)
 
     return redirect('/members')
@@ -31,11 +37,16 @@ def edit_member(id):
     member = member_repository.select(id)
     return render_template('members/edit.html', member=member)
 
-
 @members_blueprint.route("/members/<id>", methods=['POST'])
 def update_member(id):
-    member_name = request.form['member_name']
-    member = Member(member_name, id)
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    active_val = request.form['active']
+    if active_val == 1:
+        active = True
+    else:
+        active = False
+    member = Member(first_name, last_name, active, id)
     member_repository.update(member)
     return redirect('/members')
 

@@ -6,7 +6,9 @@ DROP TABLE fitness_classes;
 
 CREATE TABLE members (
     member_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    member_name VARCHAR
+    first_name VARCHAR,
+    last_name VARCHAR,
+    active BOOLEAN
 );
 
 CREATE TABLE fitness_classes (

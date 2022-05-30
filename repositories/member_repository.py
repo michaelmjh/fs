@@ -4,19 +4,31 @@ from models.fitness_class import FitnessClass
 from models.member import Member
 
 def save(member):
-    sql = "INSERT INTO members (member_name) VALUES (?) RETURNING member_id"
-    values = [member.member_name]
+    sql = "INSERT INTO members (first_name, last_name, active) VALUES (?, ?, ?) RETURNING member_id"
+    values = [member.first_name, member.last_name, member.active]
     results = run_sql(sql, values)
     member.member_id = results[0]['member_id']
     return member
 
-def select_all():
+def select_active():
     members = []
 
-    sql = "SELECT * FROM members"
+    sql = "SELECT * FROM members WHERE active = True"
     results = run_sql(sql)
     for row in results:
-        member = Member(row['member_name'], row['member_id'])
+
+        member = Member(row['first_name'], row['last_name'], row['active'], row['member_id'])
+        members.append(member)
+    return members
+
+def select_deactived():
+    members = []
+
+    sql = "SELECT * FROM members WHERE active = False"
+    results = run_sql(sql)
+    for row in results:
+
+        member = Member(row['first_name'], row['last_name'], row['active'], row['member_id'])
         members.append(member)
     return members
 
@@ -27,7 +39,8 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        member = Member(result['member_name'], result['member_id'] )
+        # active = True if result['active']  == 0 else False
+        member = Member(result['first_name'], result['last_name'], result['active'], result['member_id'])
     return member
 
 def delete_all():
@@ -40,8 +53,8 @@ def delete(id):
     run_sql(sql, values)
 
 def update(member):
-    sql = "UPDATE members SET (member_name) = (?) WHERE member_id = ?"
-    values = [member.member_name, member.member_id]
+    sql = "UPDATE members SET (first_name, last_name, active) = (?, ?, ?) WHERE member_id = ?"
+    values = [member.first_name, member.last_name, member.active, member.member_id]
     run_sql(sql, values)
 
 def select_booked_classes(id):

@@ -5,7 +5,13 @@
 <p>Member ID:</p>
 <p>{{member.member_id}}</p>
 <p>Name:</p>
-<p>{{member.member_name}}
+<p>{{member.first_name}} {{member.last_name}}</p>
+<p>Membership Status:</p>
+{% if member.active == True %}
+    <p>Active</p>
+{% else %}
+    <p>Deacivated</p>
+{% endif %}
 
 <ul>
     <a href="/members/{{member.member_id}}/book">Book class</a>

@@ -9,7 +9,7 @@
 {% else%}
     <form action="/members/{{member.member_id}}/book" method="post">
         <div>
-            <label>{{member.member_name}}</label>
+            <label>{{member.first_name}} {{member.last_name}}</label>
             <br>
             <label for="fitness_class">Class:</label>
             <br>
