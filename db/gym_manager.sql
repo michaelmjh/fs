@@ -8,6 +8,7 @@ CREATE TABLE members (
     member_id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name VARCHAR,
     last_name VARCHAR,
+    premium_member BOOLEAN,
     active BOOLEAN
 );
 

@@ -12,6 +12,13 @@
     <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
 {% else %}
     <p>Active</p>
+    <p>Membership Type:</p>
+    {% if member.premium_member == True %}
+        <p>Premium</p>
+    {% elif member.premium_member == False %}
+        <p>Standard</p>
+    {% endif %}
+
     <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
     <ul>
         <a href="/members/{{member.member_id}}/book">Book class</a>

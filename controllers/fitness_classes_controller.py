@@ -15,7 +15,7 @@ def classes():
     return render_template("classes/show.html", classes = classes)
 
 @fitness_class_blueprint.route("/classes/deactive")
-def deactivated_classes():
+def deactive_classes():
     classes = fitness_class_repository.select_deactive()
     return render_template("classes/deactive.html", classes = classes)
 
@@ -29,7 +29,6 @@ def create_class():
     time = request.form['time']
     fitness_class = FitnessClass(name, time)
     fitness_class_repository.save(fitness_class)
-
     return redirect('/classes')
 
 @fitness_class_blueprint.route("/classes/<id>/edit", methods=['GET'])
@@ -69,6 +68,9 @@ def book_members(id):
                 booked = True
         if booked == False:
             unbooked_members.append(member)
+
+    if int(fitness_class.time) > 1700 and int(fitness_class.time) < 2000:
+        unbooked_members = fitness_class_repository.select_premium_members(unbooked_members)
 
     return render_template('classes/book_members.html', fitness_class = fitness_class, unbooked_members = unbooked_members)
 

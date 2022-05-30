@@ -27,7 +27,12 @@ def add_member():
 def create_member():
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    member = Member(first_name, last_name)
+    premium_val = request.form['premium_member']
+    if premium_val == "1":
+        premium = True
+    elif premium_val == "0":
+        premium = False
+    member = Member(first_name, last_name, premium)
     member_repository.save(member)
 
     return redirect('/members')
@@ -41,12 +46,17 @@ def edit_member(id):
 def update_member(id):
     first_name = request.form['first_name']
     last_name = request.form['last_name']
+    premium_val = request.form['premium_member']
+    if premium_val == "1":
+        premium = True
+    elif premium_val == "0":
+        premium = False
     active_val = request.form['active']
     if active_val == "1":
         active = True
     elif active_val == "0":
         active = False
-    member = Member(first_name, last_name, active, id)
+    member = Member(first_name, last_name, premium, active, id)
     member_repository.update(member)
     return redirect('/members')
 
@@ -70,6 +80,8 @@ def book(id):
         if booked == False:
             unbooked_classes.append(aclass)
 
+    if member.premium_member == False:
+        unbooked_classes = fitness_class_repository.select_standard(unbooked_classes)
     return render_template('members/book.html', member = member, unbooked_classes = unbooked_classes)
 
 @members_blueprint.route("/members/<id>/book", methods=['POST'])

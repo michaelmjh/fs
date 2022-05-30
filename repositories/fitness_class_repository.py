@@ -20,6 +20,13 @@ def select_active():
         fitness_classes.append(fitness_class)
     return fitness_classes
 
+def select_standard(fitness_classes):
+    standard_classes = []
+    for fclass in fitness_classes:
+        if int(fclass.time) < 1700 or int(fclass.time) > 2000:
+            standard_classes.append(fclass)
+    return standard_classes
+
 def select_deactive():
     fitness_classes = []
 
@@ -61,11 +68,18 @@ def select_booked_members(id):
     results = run_sql(sql, values)
 
     for result in results:
-        active = result['active']
-        # if active:
         first_name = result['first_name']
         last_name = result['last_name']
-        member_id = result['member_id']            
-        new_member = Member(first_name, last_name, active, member_id)
+        premium_member = result['premium_member']
+        member_id = result['member_id']      
+        active = result['active']      
+        new_member = Member(first_name, last_name, premium_member, active, member_id)
         booked_members.append(new_member)
     return booked_members
+
+def select_premium_members(members):
+    available_members = []
+    for member in members:
+        if member.premium_member == True:
+            available_members.append(member)
+    return available_members

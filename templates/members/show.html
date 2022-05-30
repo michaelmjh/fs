@@ -22,7 +22,13 @@
         <nav>
             <ul>
                 <li>
-                    <p>{{member.member_id}}: {{member.first_name}} {{member.last_name}}</p>
+                    <p>{{member.member_id}}: </p>
+                    <p>{{member.first_name}} {{member.last_name}}</p>
+                    {% if member.premium_member == True %}
+                        <p>Premium</p>
+                    {% elif member.premium_member == False %}
+                        <p>Standard</p>
+                    {% endif %}
                     <a href="/members/{{member.member_id}}/details">Details</a>
                     <a href="/members/{{member.member_id}}/edit">Edit</a>
                     <a href="/members/{{member.member_id}}/book">Book class</a>

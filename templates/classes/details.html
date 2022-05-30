@@ -7,8 +7,8 @@
 <p>Time:</p>
 <p>{{fitness_class.time}}</p>
 <p>Status:</p>
-<p>Deactivated</p>
 {% if fitness_class.active == False %}
+    <p>Deactivated</p>
     <a href="/classes/{{fitness_class.class_id}}/edit">Edit Class Details</a>
 {% else %}
     <p>Active</p>
@@ -17,7 +17,7 @@
         {% for member in booked_members %}
         <li>
             <br>
-            <p>{{member.member_id}}: {{member.first_name}} {{member_last_name}}</p>
+            <p>{{member.member_id}}: {{member.first_name}} {{member.last_name}}</p>
         </li>
         {% endfor %}
     
