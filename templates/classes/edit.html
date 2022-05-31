@@ -1,39 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Edit Class</h1>
+<section id="page_menu">
+    <h1>Edit Class</h1>
+</section>
 
 <form action="/classes/{{fitness_class.class_id}}" method="post">
-    <div>
-        <label for="name">Class:</label>
-        <br>
-        <input type="text" id="name" name="name" value="{{fitness_class.name}}" required autofocus>
-        <br>
-        <label for="time">Time:</label>
-        <br>
-        <select name="time" id="time">
-            {% for i in range(24) %}
-                <option value="{{i}}">{{i}}:00</option>
-            {% endfor %}
-        </select>
-        <br>
-        <label for="capacity">Capacity:</label>
-        <br>
-        <input type="number" id="capacity" name="capacity" min="1" max="10" value="{{fitness_class.capacity}}">
-        <br>
-        <label for="active">Status:</label>
-        <br>
-        <select name="active" id="active">
-            <option value="1">Active</option>
-            {% if fitness_class.active == False %}
-                <option selected="selected" value="0">Deactivated</option>
-            {% else %}
-                <option value="0">Deactivated</option>
-            {% endif %}
-        </select>
-    </div>
-
-    <button type="submit">Save Changes</button>
+    <table class="styled-table">
+        <tr>
+            <th>Class</th>
+            <td>
+                <input type="text" id="name" name="name" value="{{fitness_class.name}}" required autofocus>
+            </td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>
+                <select name="time" id="time">
+                    {% for i in range(24) %}
+                        <option value="{{i}}">{{i}}:00</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Capacity</th>
+            <td>
+                <input type="number" id="capacity" name="capacity" min="1" max="10" value="{{fitness_class.capacity}}">
+            </td>
+        </tr>
+            <th>Status</th>
+            <td>
+                <select name="active" id="active">
+                    <option value="1">Active</option>
+                    {% if fitness_class.active == False %}
+                        <option selected="selected" value="0">Deactivated</option>
+                    {% else %}
+                        <option value="0">Deactivated</option>
+                    {% endif %}
+                </select>
+            </td>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit">Submit</button></td>
+            </tr>
+        </tr>
+    </table>
 </form>
 
 {% endblock %}

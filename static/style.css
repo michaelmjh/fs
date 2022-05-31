@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: sans-serif;
 }
 
 footer {
@@ -22,7 +23,17 @@ ul {
     height: 100%;
     overflow: auto;
     font-size: 0.9em;
-    font-family: sans-serif;
+    
+}
+
+/* #page_menu {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+}  */
+
+nav {
+    list-style-type: none;
 }
   
 li a {
@@ -43,11 +54,13 @@ li a:hover:not(.active) {
 }
 
 .styled-table {
+    padding-top: 50px;
     border-collapse: collapse;
     margin: 35px 0;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 500px;
+    width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 

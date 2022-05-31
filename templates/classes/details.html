@@ -1,18 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Class Details</h1>
-<p>Class:</p>
-<p>{{fitness_class.name}}
-<p>Time:</p>
-<p>{{fitness_class.time}}:00</p>
-<p>Capacity:</p>
-<p>{{fitness_class.capacity}}</p>
-<p>Status:</p>
-{% if fitness_class.active == False %}
-    <p>Deactivated</p>
-    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
-{% else %}
+
+<section id="page_menu">
+    <h1>Class Details</h1>
+    <nav>
+        <li>
+            <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
+        </li>
+    </nav>
+</section>
+
+
+<section>
+    <table class="styled-table">
+        <tr>
+            <th>Class</th>
+            <td>{{fitness_class.name}}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{fitness_class.time}}:00</td>
+        </tr>
+        <tr>
+            <th>Capacity</th>
+            <td>{{fitness_class.capacity}}</td>
+        </tr>
+            <th>Status</th>
+            {% if fitness_class.active == True %}
+                <td>Active</td>
+            {% else %}
+                <td>Deactivated</td>
+            {% endif %}
+    </table>
+</section>
+
+
+<section>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Name</th>
+                <th>Time</th> 
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bclass in booked_classes %}
+                <tr>
+                    <td>{{bclass.class_id}}</td>
+                    <td>{{bclass.name}}</td>
+                    <td>{{bclass.time}}:00</td>
+                    <td><a href="/classes/{{bclass.class_id}}/details">Show Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+
+
     <p>Active</p>
     <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
     <ol>
@@ -30,5 +78,5 @@
         <p>No more spaces avalable on this class</p>
     {% endif %}
     
-{% endif %}
+
 {% endblock %}

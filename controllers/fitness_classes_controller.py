@@ -12,7 +12,7 @@ fitness_class_blueprint = Blueprint("fitness_class", __name__)
 @fitness_class_blueprint.route("/classes")
 def classes():
     classes = fitness_class_repository.select_active()
-    return render_template("classes/show.html", classes = classes)
+    return render_template("classes/active.html", classes = classes)
 
 @fitness_class_blueprint.route("/classes/deactive")
 def deactive_classes():

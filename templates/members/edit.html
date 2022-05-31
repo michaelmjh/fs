@@ -1,42 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
+<section id="page_menu">
+    <h1>Edit Member</h1>
+</section>
 
 <form action="/members/{{member.member_id}}" method="post">
-    <div>
-        <label for="member_name">First Name:</label>
-        <br>
-        <input type="text" id="first_name" name="first_name" value="{{member.first_name}}" required autofocus>
-        <br>
-        <label for="last_name">Last Name:</label>
-        <br>
-        <input type="text" id="last_name" name="last_name" value="{{member.last_name}}" required>
-        <br>
-        <label for="active">Membership Status:</label>
-        <br>
-        <select name="active" id="active">
-            <option value="1">Active</option>
-            {% if member.active == False %}
-                <option selected="selected" value="0">Deactivated</option>
-            {% else %}
-                <option value="0">Deactivated</option>
-            {% endif %}
-        </select>
-        <br>
-        <label for="active">Membership Status:</label>
-        <br>
-        <select name="premium_member" id="premium_member">
-            
-            {% if member.premium_member == True %}
-                <option value="0">Standard</option>
-                <option selected="selected" value="1">Premium</option>
-            {% else %}
-                <option selected="selected" value="0">Standard</option>
-                <option value="1">Premium</option>
-            {% endif %}
-        </select>
-    </div>
-
-    <button type="submit">Save Changes</button>
+    <table class="styled-table">
+        <tr>
+            <th>Last Name</th>
+            <td><input type="text" id="last_name" name="last_name" value="{{member.last_name}}" required autofocus></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td><input type="text" id="first_name" name="first_name" value="{{member.first_name}}"" required></td>
+        </tr>
+        <tr>
+            <th>Membership Status</th>
+            <td>
+                <select name="active" id="active">
+                    <option value="1">Active</option>
+                    {% if member.active == False %}
+                        <option selected="selected" value="0">Deactivated</option>
+                    {% else %}
+                        <option value="0">Deactivated</option>
+                    {% endif %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Membership Type</th>
+            <td>
+                <select name="premium_member" id="premium_member">
+                    {% if member.premium_member == True %}
+                        <option value="0">Standard</option>
+                        <option selected="selected" value="1">Premium</option>
+                    {% else %}
+                        <option selected="selected" value="0">Standard</option>
+                        <option value="1">Premium</option>
+                    {% endif %}
+                </select>
+            </td>
+            <tr>
+                <th></th>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </tr>
+    </table>
 </form>
 
 {% endblock %}

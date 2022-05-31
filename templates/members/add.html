@@ -1,25 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form action="/members" method="post">
-    <div>
-        <label for="member_name">First Name:</label>
-        <br>
-        <input type="text" id="first_name" name="first_name" placeholder="Enter a name" required autofocus>
-        <br>
-        <label for="last_name">Last Name:</label>
-        <br>
-        <input type="text" id="last_name" name="last_name" placeholder="Enter a name" required>
-        <br>
-        <label for="premium_member">Membership Type:</label>
-        <br>
-        <select name="premium_member" id="premium_member">
-            <option value="0">Standard</option>
-            <option value="1">Premium</option>
-        </select>
-    </div>
+<section id="page_menu">
+    <h1>Add New Member</h1>
+</section>
 
-    <button type="submit">Add Member</button>
+<form action="/members" method="post">
+    <table class="styled-table">
+        <tr>
+            <th>Last Name</th>
+            <td><input type="text" id="last_name" name="last_name" placeholder="Enter a name" required autofocus></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td><input type="text" id="first_name" name="first_name" placeholder="Enter a name" required></td>
+        </tr>
+        <tr>
+            <th>Membership Type</th>
+            <td>
+                <select name="premium_member" id="premium_member">
+                    <option value="0">Standard</option>
+                    <option value="1">Premium</option>
+                </select>
+            </td>
+            <tr>
+                <th></th>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </tr>
+    </table>
+    
 </form>
 
 {% endblock %}

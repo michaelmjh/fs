@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <section id="page_menu">
+        <h1>Deactivated Classes</h1>
+        <nav>
+            <li>
+                <a href="/classes/add">Add New Class</a>
+            </li>
+            <li>
+                <a href="/classes">Show Active Classes</a>
+            </li>
+        </nav>
+    </section>
 
 
-<h1>Deactivated Classes</h1>
-
-    {% for fc in classes %}
-        
-            <ul>
-                <li>
-                    <p>Class: {{fc.name}}</a></p>
-                    <p>Time: {{fc.time}}:00</p>
-                    <p>Total Capacity: {{fc.capacity}}</p>
-                    <a href="/classes/{{fc.class_id}}/details">Show Details</a>
-                </li>
-            </ul>
-            
-        
-    {% endfor %}
-</table>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Capacity</th>    
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fc in classes %}
+                <tr>
+                    <td>{{fc.class_id}}</td>
+                    <td>{{fc.name}}</td>
+                    <td>{{fc.time}}:00</td>
+                    <td>{{fc.capacity}}</td>
+                    <td><a href="/classes/{{fc.class_id}}/details">Show Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

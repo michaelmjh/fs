@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<section id="page_menu">
+    <h1>Bookings</h1>
+</section>
 
 <table class="styled-table">
     <thead>
@@ -23,8 +25,6 @@
                 <td><a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a></td>
             </tr>
         {% endfor %}
-        
-     
     </tbody>
 </table>
 {% endblock %}

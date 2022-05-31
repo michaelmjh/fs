@@ -2,17 +2,17 @@
 
 {% block content %}
     <section id="page_menu">
-        <h1>Deactivated Members</h1>
+        <h1>Members</h1>
         <nav>
             <li>
                 <a href="/members/add">Add New Member</a>
             </li>
             <li>
-                <a href="/members">Show Active Members</a>
+                <a href="/members/deactive">Show Deactived Members</a>
             </li>
         </nav>
     </section>
-    
+
     <table class="styled-table">
         <thead>
             <tr>
@@ -37,4 +37,6 @@
             {% endfor %}
         </tbody>
     </table>
+    
+    
 {% endblock %}

@@ -1,35 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Member Details</h1>
-<p>Member ID:</p>
-<p>{{member.member_id}}</p>
-<p>Name:</p>
-<p>{{member.first_name}} {{member.last_name}}</p>
-<p>Membership Status:</p>
-{% if member.active == False %}
-    <p>Deactivated</p>
-    <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
-{% else %}
-    <p>Active</p>
-    <p>Membership Type:</p>
-    {% if member.premium_member == True %}
-        <p>Premium</p>
-    {% elif member.premium_member == False %}
-        <p>Standard</p>
-    {% endif %}
 
-    <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
-    <ul>
-        <a href="/members/{{member.member_id}}/book">Book class</a>
-        {% for bclass in booked_classes %}
-        <li>
-            <p>{{bclass.class_id}}: {{bclass.name}}, {{bclass.time}}:00</p>
-        </li>
-        {% endfor %}
-    </ul>
+    <section id="page_menu">
+        <h1>Member Details</h1>
+        <nav>
+            <li>
+                <a href="/members/{{member.member_id}}/edit">Edit Member Details</a>
+            </li>
+        </nav>
+    </section>
+        
+    <section>
+        <table class="styled-table">
+            <tr>
+                <th>Member ID:</th>
+                <td>{{member.member_id}}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{member.last_name}}, {{member.first_name}}</td>
+            </tr>
+            <tr>
+                <th>Membership Status</th>
+                {% if member.active == False %}
+                    <td>Deactivated</td>
+                {% else %}
+                    <td>Active</td>
+                {% endif %}
+            </tr>     
+            {% if member.active == True %}
+                <th>Membership Type:</th>
+                {% if member.premium_member == True %}
+                    <td>Premium</td>
+                {% elif member.premium_member == False %}
+                    <td>Standard</td>
+                {% endif %}
+            {% endif %}
+        </table>
+    </section>
+
+    <section id="page_menu">
+        <h1>Booked Classes</h1>
+        <nav>
+            {% if member.active == True %}
+                <li>
+                    <a href="/members/{{member.member_id}}/book">Book class</a>
+                </li>
+            {% endif %}
+        </nav>
+    </section>
+
+    <section>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Class ID</th>
+                    <th>Name</th>
+                    <th>Time</th> 
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bclass in booked_classes %}
+                    <tr>
+                        <td>{{bclass.class_id}}</td>
+                        <td>{{bclass.name}}</td>
+                        <td>{{bclass.time}}:00</td>
+                        <td><a href="/classes/{{bclass.class_id}}/details">Show Details</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
     
-{% endif %}
-
 
 {% endblock %}
