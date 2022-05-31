@@ -4,40 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Gym Manager</title>
 </head>
 <body>
-    <section id="content">
-        <section id="header">
-            <h2>Gym</h2>
-        </section>
-    
-        <section id="aside">
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/classes">Classes</a>
-                    </li>
-                    <li>
-                        <a href="/members">Members</a>
-                    </li>
-                    <li>
-                        <a href="/bookings">Bookings</a>
-                    </li>
-                </ul>
-            </nav>
-        </section>
+    <div id='grid-container'>
+        <div >
+            <ul section="side-menu">
+                <li>
+                    <a class="active" href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/classes">Classes</a>
+                </li>
+                <li>
+                    <a href="/members">Members</a>
+                </li>
+                <li>
+                    <a href="/bookings">Bookings</a>
+                </li>
+            </ul>
+        </div>
+
+        <section id="main-content" style="margin-left:25%;padding:1px 16px;height:1000px;">
             {% block content %}
 
             {% endblock %}
         </section>
 
-        <section id="footer">
+        <footer>
             <h3>© 2022 Big Guns Gym</h3>
-        </section>
-
+        </footer>
+    </div>
 </body>
 </html>

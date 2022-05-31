@@ -1,19 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Bookings</h1>
-    {% for booking in bookings %}
-        <nav>
-            <ul>
-                <li>
-                    <p>Booking ID:{{booking.booking_id}}</p>
-                    <p>Class: {{booking.fitness_class.name}}</a></p>
-                    <p>Time: {{booking.fitness_class.time}}:00</p>
-                    <p>Member: {{booking.member.first_name}} {{booking.member.last_name}}</p>
-                    <a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a>
-                </li>
-            </ul>
-        </nav>
-    {% endfor %}
+
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Class</th>
+            <th>Time</th>
+            <th>Member</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{booking.booking_id}}</td>
+                <td>{{booking.fitness_class.name}}</td>
+                <td>{{booking.fitness_class.time}}:00</td>
+                <td>{{booking.member.first_name}} {{booking.member.last_name}}</td>
+                <td><a href="/bookings/{{booking.booking_id}}/del">Delete Booking</a></td>
+            </tr>
+        {% endfor %}
+        
+     
+    </tbody>
 </table>
 {% endblock %}
+
+                
+            
+        
+    

@@ -4,7 +4,7 @@
 <h1>Classes</h1>
 
 <section id="class_navigation">
-    <nav>
+
         <ul>
             <li>
                 <a href="/classes/add">Add New Class</a>
@@ -12,11 +12,11 @@
             <li>
                 <a href="/classes/deactive">Show Deactivated Classes</a>
             </li>
-    </nav>
+ 
 </section>
 
     {% for fc in classes %}
-        <nav>
+  
             <ul>
                 <li>
                     <p>Class: {{fc.name}}</a></p>
@@ -25,7 +25,7 @@
                 </li>
             </ul>
             
-        </nav>
+        
     {% endfor %}
 </table>
 {% endblock %}
