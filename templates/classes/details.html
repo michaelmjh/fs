@@ -35,48 +35,47 @@
     </table>
 </section>
 
+<section id="page_menu">
+    <h1>Members Booked</h1>
+    {% if fitness_class.active == True %}
+        <nav>
+            {% if spaces > 0 %}
+                <li>
+                    <a href="/classes/{{fitness_class.class_id}}/book">Spaces Available: {{spaces}} - Book member</a>
+                </li>
+            {% else %}
+                <li>No more spaces avalable on this class</li>
+            {% endif %}
+        </nav>
+    {% endif %}
+</section>
 
 <section>
     <table class="styled-table">
         <thead>
             <tr>
-                <th>Class ID</th>
+                <th>Member ID</th>
                 <th>Name</th>
-                <th>Time</th> 
+                <th>Memebership Type</th> 
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            {% for bclass in booked_classes %}
+            {% for member in booked_members %}
                 <tr>
-                    <td>{{bclass.class_id}}</td>
-                    <td>{{bclass.name}}</td>
-                    <td>{{bclass.time}}:00</td>
-                    <td><a href="/classes/{{bclass.class_id}}/details">Show Details</a></td>
+                    <td>{{member.member_id}}</td>
+                    <td>{{member.last_name}}, {{member.first_name}} </td>
+                    {% if member.premium_member == True %}
+                        <td>Premium</td>
+                    {% elif member.premium_member == False %}
+                        <td>Standard</td>
+                    {% endif %}
+                    </td>
+                    <td><a href="/members/{{member.member_id}}/details">Show Details</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </section>
-
-
-
-    <p>Active</p>
-    <a href="/classes/{{fitness_class.class_id}}/edit">Edit Details</a>
-    <ol>
-        {% for member in booked_members %}
-        <li>
-            <br>
-            <p>{{member.member_id}}: {{member.first_name}} {{member.last_name}}</p>
-        </li>
-        {% endfor %}
-    </ol>
-    {% if spaces > 0 %}
-        <p>Spaces Available: {{spaces}}</p>
-        <a href="/classes/{{fitness_class.class_id}}/book">Book member</a>
-    {% else %}
-        <p>No more spaces avalable on this class</p>
-    {% endif %}
-    
 
 {% endblock %}

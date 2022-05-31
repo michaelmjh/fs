@@ -90,4 +90,4 @@ def result(id):
     fitness_class = fitness_class_repository.select(id)
     new_booking = Booking(fitness_class, member)
     booking_repository.save(new_booking)
-    return redirect(f"/classes")
+    return redirect(f"/classes/{id}/details")

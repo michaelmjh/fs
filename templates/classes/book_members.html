@@ -1,21 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Class Details</h1>
-<p>Class:</p>
-<p>{{fitness_class.name}}
-<p>Class Time:</p>
-<p>{{fitness_class.time}}:00</p>
+<section id="page_menu">
+    <h1>Book Class</h1>
+</section>
 
-<form action="/classes/{{fitness_class.class_id}}/book" method="post">
-    <select id="member_id" name="member_id">
-        {% for member in unbooked_members %}            
-            <option value="{{member.member_id}}">
-                {{member.member_id}}: {{member.first_name}} {{member.last_name}}
-            </option>
-        {% endfor %}
-    </select>
-    <br>
-    <button type="submit">Book class</button>
+<form action='/classes/{{fitness_class.class_id}}/book' method='post'>
+    <table class="styled-table">
+        <tr>
+            <th>Class</th>
+            <td>{{fitness_class.name}}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{fitness_class.time}}:00</td>
+        </tr>
+        <tr>
+            <th>Capacity</th>
+            <td>{{fitness_class.capacity}}</td>
+        </tr>
+
+        <tr>
+            <th>Member</th>
+            <td>
+                <select name="member_id" id="member_id">
+                    {% for member in unbooked_members %}
+                        <option value="{{member.member_id}}">
+                            {{member.member_id}}: {{member.last_name}}, {{member.first_name}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit">Book class</button>
+            </td>
+        </tr>
+        
+    </table>
 </form>
+
 {% endblock %}

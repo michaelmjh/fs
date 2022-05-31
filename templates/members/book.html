@@ -1,28 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Book a Class</h1>
 
-{% if unbooked_classes == [] %}
-    <p>Sorry, there are no classes currently available</p>
-    <a href="/members/{{member.member_id}}/details">Member Details</a>
-{% else%}
-    <form action="/members/{{member.member_id}}/book" method="post">
-        <div>
-            <label>{{member.last_name}}, {{member.first_name}}</label>
-            <br>
-            <label for="fitness_class">Class:</label>
-            <br>
-            <select id="fitness_class" name="class_id">
-                {% for fitness_class in unbooked_classes %}
-                    <option value="{{fitness_class.class_id}}">
-                        {{fitness_class.name}}: {{fitness_class.time}}:00
-                    </option>
-                {% endfor%}
-            </select>
-        </div>
+<section id="page_menu">
+    <h1>Book a Class</h1>
+</section>
 
-        <button type="submit">Book class</button>
-    </form>
-{% endif %}
+<form action='/members/{{member.member_id}}/book' method='post'>
+    <table class="styled-table">
+        <tr>
+            <th>Member ID</th>
+            <td>{{member.member_id}}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{member.last_name}}, {{member.first_name}}</td>
+        </tr>
+        <tr>
+            <th>Membership Type:</th>
+            {% if member.premium_member == True %}
+                <td>Premium</td>
+            {% elif member.premium_member == False %}
+                <td>Standard</td>
+            {% endif %}
+        </tr>
+
+        {% if unbooked_classes == [] %}
+            <tr>
+                <th>Class</th>
+                <td>Sorry, there are no classes currently available</td>
+            </tr>
+        {% else%}
+            <th>Class</th>
+            <td>
+                <select id="class_id" name="class_id">
+                    {% for fitness_class in unbooked_classes %}
+                        <option value="{{fitness_class.class_id}}">
+                            {{fitness_class.name}}: {{fitness_class.time}}:00
+                        </option>
+                    {% endfor %}
+            </td>
+            <tr>
+                <th></th>
+                <td>
+                    <button type="submit">Book class</button>
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+</form>
+
+            
+                
+              
+    
 {% endblock %}
