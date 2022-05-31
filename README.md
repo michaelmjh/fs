@@ -1,7 +1,8 @@
 <img width="1080" alt="home_page" src="https://user-images.githubusercontent.com/74016689/171225711-449259e5-ca42-44d4-8f88-0191f0ad997d.png">
 
 ## Brief
-    A local gym has asked for a piece of software to help them to manage memberships, and register members for classes.
+    A local gym has asked for a piece of software to help them to manage memberships, and register 
+    members for classes.
 
     - Allows staff to create and edit Members
     - Allows staff to create and edit Classes
@@ -9,8 +10,10 @@
     - Shows a list of all upcoming classes
     - Show all members that are booked in for a particular class
     - Classes have a maximum capacity, and users can only be added while there is space remaining
-    - Members Premium or Standard membership options. Standard members can only be signed up for off-peak hours classes.
-    - Mark members and classes as active/deactivated. Deactivated members/classes will not appear when creating bookings.
+    - Members Premium or Standard membership options. Standard members can only be signed up for 
+      off-peak hours classes.
+    - Mark members and classes as active/deactivated. Deactivated members/classes will not appear 
+      when creating bookings.
 
 ## Running Instructions
     Initialise the database:
